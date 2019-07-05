@@ -20,7 +20,9 @@ function _platformsh_drush_site_url() {
   // Filter the list of routes to find those matching the current app.
   $appUrls = [];
   foreach ($routes as $url => $route) {
-    if ($route['type'] === 'upstream' && $route['upstream'] === $appName) {
+    // Use the first element of the upstream.
+    $upstream = explode(':', $route['upstream'])[0];
+    if ($route['type'] === 'upstream' && $upstream === $appName) {
       $appUrls[$route['original_url']] = $url;
     }
   }
